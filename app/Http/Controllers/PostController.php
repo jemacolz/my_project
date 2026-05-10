@@ -39,7 +39,7 @@ class PostController extends Controller
 
         Post::create($request->all());
         return redirect('/')
-          ->with('success', 'Post Created Sucessfully');
+          ->with('success', 'Post Created Sucessfully haha');
 
     }
 
