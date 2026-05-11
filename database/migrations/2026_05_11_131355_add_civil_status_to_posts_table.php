@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('description')->nullable()->default('No description')->after('content');
+            $table->string('civil_status')
+          ->nullable()
+          ->default('not specified')
+          ->after('gender');
+            //
         });
     }
 
@@ -22,7 +26,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('description');
+            $table->dropColumn('civil_status');
+            //
         });
     }
 };
