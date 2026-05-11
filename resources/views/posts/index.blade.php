@@ -2,13 +2,16 @@
 
 <a href="{{ route('posts.create') }}">Create Post</a>
 
-@foreach($posts as $post)
-    <h3>{{ $post->title }}</h3>
-    <p>{{ $post->content }}</p>
+@foreach($post as $posts)
+    <h3>{{$posts->title }}</h3>
+    <p>{{ $posts->content }}</p>
+    <p>{{ $posts->description }}</p>
+    <p>{{ $posts->gender }}</p>
+    <p>{{ $posts->civil_status }}</p>
 
-    <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+    <a href="{{ route('posts.edit', $posts->id) }}">Edit</a>
 
-    <form method="POST" action="{{ route('posts.destroy', $post->id) }}">
+    <form method="POST" action="{{ route('posts.destroy', $posts->id) }}">
     @csrf
     @method('DELETE')
     <button type="submit">Delete</button>
