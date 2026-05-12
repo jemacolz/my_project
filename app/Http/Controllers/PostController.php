@@ -8,11 +8,21 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
+    // implement roles and behaviors for post controller
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
+    
     /**
      * Display a listing of the resource.
      */
     public function index(Post $post)
     {
+        // check if user is authenticated
+        if (!auth()->check()) { //guest
+            return redirect()->route('login');
+        }
         $post = Post::all();
         return view('posts.index', compact('post'));
 
@@ -105,7 +115,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post, int $id)
+    public function destroy(int $id)
     {
         $posts = Post::findOrFail($id);
         $posts ->delete();
