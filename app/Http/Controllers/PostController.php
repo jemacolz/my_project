@@ -3,28 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+// use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
 use Illuminate\View\View;
 
-class PostController extends Controller
+class PostController extends Controller implements HasMiddleware
 {
     // implement roles and behaviors for post controller
-    public function __construct()
+    public static function middleware(): array
     {
-        $this->middleware('auth')->except(['index']);
+        return [
+            new Middleware ('auth', except:['orig']),
+        ];
     }
     
     /**
      * Display a listing of the resource.
      */
-    public function index(Post $post)
+    public function index()
     {
         // check if user is authenticated
-        if (!auth()->check()) { //guest
-            return redirect()->route('login');
-        }
         $post = Post::all();
-        return view('posts.index', compact('post'));
+        return view('posts.index', ['post' => $post]);
 
     }
 
@@ -70,7 +73,8 @@ class PostController extends Controller
         // return redirect('/')
         //   ->with(['success' => 'Post Created Sucessfully haha','options' => $options_deliver]);
 
-
+       
+        
         Post::create($request->all());
         return redirect('/')
           ->with('success', 'Post Created Sucessfully haha');

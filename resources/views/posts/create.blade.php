@@ -1,3 +1,8 @@
+
+@include('layouts.navbar')
+
+
+
 <h1>Create Post</h1>
 
 @if ($errors->any())

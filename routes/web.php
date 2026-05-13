@@ -7,12 +7,13 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 
 // Route::get('/', [AuthController::class, 'showLogin']);
 // check if user is authenticated
+
 
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::get('/index', [PostController::class, 'index'])->name('posts.index');
