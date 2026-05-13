@@ -12,26 +12,8 @@
     >
 
     {{-- AdminLTE CSS --}}
-    @vite('resources/css/adminlte.css')
+    @vite('resources/css/adminlte.css', 'resources/css/style.css')
 
-    <style>
-        .app-sidebar {
-            top: 0 !important;
-            min-height: 100vh;
-        }
-
-        .sidebar-brand {
-            height: 57px;
-            display: flex;
-            align-items: center;
-        }
-
-        .brand-image {
-            width: 36px;
-            height: 36px;
-            object-fit: cover;
-        }
-    </style>
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">

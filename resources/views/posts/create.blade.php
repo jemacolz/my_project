@@ -1,40 +1,53 @@
+@extends('layouts.app')
 
-@include('layouts.navbar')
+@section('content')
 
+@VITE('resources/css/style.css')
+<div class="post-container">
+    <h1>Create Post</h1>
 
+    @if ($errors->any())
+        <div class="error-box">
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
 
-<h1>Create Post</h1>
+    <form method="POST" action="/posts">
+        @csrf
 
-@if ($errors->any())
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                placeholder="Enter title"
+                value="{{ old('title') }}"
+            >
+        </div>
 
-   @foreach ($errors->all() as $errors)
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea 
+                id="content" 
+                name="content" 
+                placeholder="Enter content"
+            >{{ old('content') }}</textarea>
+        </div>
 
-       <p>{{ $errors }}</p>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+                id="description" 
+                name="description" 
+                placeholder="Enter description"
+            >{{ old('description') }}</textarea>
+        </div>
 
-   @endforeach
+        <button type="submit" class="btn-save">Save Post</button>
+    </form>
+</div>
 
-@endif
-
-
-<form method="POST" action="/posts">
-    @csrf
-
-    <input type="text" name="title" placeholder="Title">
-    <br><br>
-
-    <textarea name="content" placeholder="Content"></textarea>
-    <br><br>
-
-    <textarea name="description" placeholder="Description"></textarea>
-    <br><br>
-
-    
-    
-    {{-- <select name="options_deliver" id="options_deliver">
-        @foreach($options as $key => $value)
-            <option value="{{ $key }}">{{ $value }}</option>
-        @endforeach
-    </select> --}}
-    <br><br>
-    <button type="submit">Save</button>
-</form>
+@endsection
