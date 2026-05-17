@@ -89,10 +89,7 @@ class PostController extends Controller implements HasMiddleware
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post, int $id)
+    public function edit(int $id)
     {
         $post = Post::findOrFail($id);
         return view('posts.edit', compact('post'));
@@ -101,20 +98,34 @@ class PostController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,int $id)
-    {
+    public function update(Request $request, int $id)
+{
+    $request->validate([
+        'title' => 'required',
+        'content' => 'required',
+        'gender' => 'required',
+        'civil_status' => 'required',
+    ]);
 
-       $request->validate([
-         'title'=> 'required',
-         'content'=> 'required',
-       ]);
 
-        $posts = Post::findOrFail($id);
-        $posts ->update($request->all());
-        return redirect('/')
-          ->with('success', 'Update Success');
+    // apply new data
+    $post = Post::findOrFail($id);
 
-    }
+   $post->fill($request->only([
+    'title',
+    'content',
+    'gender',
+    'civil_status'
+]));
+
+if (!$post->isDirty()) {
+    return back()->with('info', 'No changes detected');
+}
+
+$post->save();
+
+return back()->with('success', 'Success edit');
+}
 
     /**
      * Remove the specified resource from storage.
