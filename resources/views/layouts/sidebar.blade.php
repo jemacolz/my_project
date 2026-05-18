@@ -29,20 +29,13 @@
                     </a>
                 </li>
 
-                <li class="nav-header">POSTS</li>
-
-                <li class="nav-item">
-                    <a href="{{ route('posts.index') }}" class="nav-link">
-                        <i class="nav-icon bi bi-card-list"></i>
-                        <p>All Posts</p>
-                    </a>
-                </li>
+                <li class="nav-header">NLRC</li>
 
                 @auth
                     <li class="nav-item">
                         <a href="{{ route('posts.create') }}" class="nav-link">
-                            <i class="nav-icon bi bi-plus-circle"></i>
-                            <p>Create Post</p>
+                            <i class="nav-icon bi bi-list"></i>
+                            <p>Clearance</p>
                         </a>
                     </li>
                 @endauth

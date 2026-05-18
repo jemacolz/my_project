@@ -30,13 +30,13 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Post List</h3>
+                    <h3 class="card-title">Clearance</h3>
 
                     <div class="card-tools">
                         @auth
                             <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm">
-                                <i class="bi bi-plus-circle"></i>
-                                Create Post
+                                <i class="bi bi-search"></i>
+                                Filter
                             </a>
                         @endauth
                     </div>
@@ -73,9 +73,9 @@
 
                                         @auth
                                             <td>
-                                                <a href="{{ route('posts.edit', $posts->id) }}" class="btn btn-warning btn-sm">
-                                                    <i class="bi bi-pencil-square"></i>
-                                                    Edit
+                                                <a href="{{ route('posts.edit', $posts->id) }}" class="text-decoration-none me-2 p-0">
+                                                    <i class="bi bi-pencil-fill"></i>
+                                            
                                                 </a>
 
                                                 <form method="POST" action="{{ route('posts.destroy', $posts->id) }}"
@@ -83,9 +83,9 @@
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="bi bi-trash"></i>
-                                                        Delete
+                                                    <button type="submit" class="text-decoration-none border-0 bg-transparent p-0 m-0 align-baseline" style="color: rgb(233, 66, 25)">
+                                                        <i class="bi bi-trash-fill"></i>
+                                                    
                                                     </button>
                                                 </form>
                                             </td>
